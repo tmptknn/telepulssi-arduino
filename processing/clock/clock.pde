@@ -8,7 +8,7 @@ import java.io.*;
 
 import java.text.*;
 
-Telepulssi telepulssi;
+Divoom divoom;
 final static DateFormat timeFmt = new SimpleDateFormat("HHmmss");
 final static DateFormat dayFmt = new SimpleDateFormat("E d.M.y");
 PImage logo;
@@ -18,8 +18,7 @@ boolean noTemp = true;
 Timer timer;
 
 public void settings() {
-  // Telepulssi screen resolution is 40x7
-  size(40, 7);
+  size(16,16);
 }
 
 void setup() {  
@@ -41,8 +40,8 @@ void setup() {
   degree = loadImage("degree.png");
 
   // If you supply serial port from command-line, use that. Emulate otherwise.
-  String port = args == null ? null : args[0];
-  telepulssi = new Telepulssi(this, port == null, port); // Preview only
+  Integer port = args == null ? null : parseInt(args[0]);
+  divoom = new Divoom(this, port == null, 1337); // Preview only
 
   // Hide the original window
   surface.setVisible(false);
@@ -76,7 +75,7 @@ void draw() {
   drawLogo();
 
   // Finally update the screen and preview.
-  telepulssi.update();
+  divoom.update();
 }
 
 void drawLogo() {
